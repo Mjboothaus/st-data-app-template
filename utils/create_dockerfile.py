@@ -1,35 +1,43 @@
 import toml
 from pathlib import Path
 
-def create_dockerfile_with_env_vars(env_file="../.secrets.toml", dockerfile="../Dockerfile", sections=None):
 
-    env_dict = toml.load(Path(env_file))
+def create_dockerfile_with_env_vars(env_file=".secrets_env.toml", dockerfile="Dockerfile", sections=None):
+    try:
+        env_dict = toml.load(Path(env_file))
+    except Exception as IOError:
+        raise(IOError)
 
     if sections is None:
-        sections = DOCKERFILE_SECTIONS = ["header", "port", "env", "python", "app"]
+        sections = DOCKERFILE_SECTIONS = [
+            "head", "port", "env", "py", "app"]
 
-    # Read in each of the pieces
+    # Read in each of the Dockerfile pieces
 
     if Path(dockerfile).exists():
-        Path(dockerfile).unlink() 
+        Path(dockerfile).unlink()
 
     for section in sections:
         if section != "env":
-            with open(Path(f"../Dockerfile_{section}.txt"), "r") as f:
-                text = f.readlines()
-                with open(Path(dockerfile), "a") as fout:
-                    fout.writelines(text)
-                    fout.write("\n")
+            try:
+                with open(Path(f"Dockerfile_{section}"), "r") as f:
+                    text = f.readlines()
+                    with open(Path(dockerfile), "a") as fout:
+                        fout.writelines(text)
+                        fout.write("\n")
+            except Exception as IOError:
+                raise(IOError)
         else:
             try:
                 env_dict = toml.load(Path(env_file))
             except Exception as IOError:
-                print(IOError)
+                raise(IOError)
 
             with open(Path(dockerfile), "a") as fout:
                 for k, v in env_dict.items():
                     fout.writelines(f"ENV {k}={v}\n")
                 fout.write("\n")
 
-if __main__:
-  create_dockerfile_with_env_vars()
+
+if __name__ == "__main__":
+    create_dockerfile_with_env_vars()

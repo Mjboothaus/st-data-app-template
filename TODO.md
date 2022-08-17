@@ -13,6 +13,11 @@ Check the version of Streamlit you're using:
 `just stv`
 
 
+Create a `.env` to store any secrets used in the `justfile` (not to be committed to GitHub)
+
 Use of DynaConf
 
 Can be swapped out for another such library.
+
+Create a file `.secrets_env.toml` in the root (top) directory which contains any environment variables that you want to create in the Dockerfile
+
