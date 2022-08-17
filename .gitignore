@@ -1,5 +1,4 @@
 .venv*
-Dockerfile
 .secrets_env.toml
 
 # Byte-compiled / optimized / DLL files
