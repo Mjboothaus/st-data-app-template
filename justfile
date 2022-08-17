@@ -3,7 +3,7 @@
 # Local just variables
 
 project_name := "st-data-app-template"
-app_py := "src/Main.py"
+app_py := "app/Main.py"
 server_port := "8080"
 gcp_region := "australia-southeast1"
 docs_url := "https://TO_BE_DEFINED"
@@ -62,11 +62,11 @@ stv:
 # Run app
 
 app:
-  streamlit run {{app_py}} --server.port={{server_port}} --server.address=localhost
+  streamlit run {{app_py}} --server.port {{server_port}} --server.address localhost
 
 dockerfile:
   #!/usr/bin/env bash
-  python -m create_dockerfile.py
+  python utils/create_dockerfile.py
   
 
 # Build and run app in a (local) Docker container

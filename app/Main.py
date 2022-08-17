@@ -1,8 +1,9 @@
-# Main.py -- for creating multipage app
+# Main.py -- for creating a basic multi-page Streamlit app
 
 import os
 from pathlib import Path
 from config import settings
+from src.helper import render_markdown_file
 
 import streamlit as st
 
@@ -29,9 +30,11 @@ def create_app_header(app_title, subtitle=None):
 
 create_app_header(APP_TITLE, SUB_TITLE)
 
+
 try:
     st.write(os.environ["TEST_ENV_VAR"])
 except Exception as e:
     st.write(e)
 
-# read_render_markdown_file("docs/Main.md", output="streamlit")
+
+render_markdown_file(Path.cwd()/"docs/Main.md")
