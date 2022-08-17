@@ -1,5 +1,9 @@
-# See https://stackoverflow.com/questions/68673221/warning-running-pip-as-the-root-user
-# for enhancements to Dockerfile e.g. not running as root & in venv
+# See: https://cloud.google.com/run/docs/quickstarts/build-and-deploy/deploy-python-service
 
-FROM python:3.9-slim-bullseye
+FROM python:{{PYTHON_VERSION}}-slim-bullseye
 RUN apt-get update && apt-get install -y git
+
+# Allow statements and log messages to immediately appear in the Knative logs
+ENV PYTHONUNBUFFERED True
+
+# Environment variables (set from `.secrets_env.toml`)

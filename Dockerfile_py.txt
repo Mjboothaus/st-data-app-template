@@ -1,4 +1,6 @@
 # TODO: Create a venv & don't be root to improve security
+# See https://stackoverflow.com/questions/68673221/warning-running-pip-as-the-root-user
+# for enhancements to Dockerfile e.g. not running as root & in venv
 
 # Python requirements install
 

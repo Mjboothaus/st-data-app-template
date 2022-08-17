@@ -11,6 +11,6 @@ WORKDIR /app
 
 # Run app
 
-ENTRYPOINT ["streamlit", "run", "app/Main.py", "--server.port=8080", "--server.address=0.0.0.0"]
+ENTRYPOINT ["streamlit", "run", "{{STREAMLIT_RUN_PY}}", "--server.port={{PORT}}", "--server.address=0.0.0.0"]
 
 # See https://discuss.streamlit.io/t/deploying-streamlit-on-gcp-cloud-run-problem-when-using-new-multipage-app-feature/26316/3

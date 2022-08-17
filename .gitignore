@@ -1,5 +1,7 @@
+# See also .git/info/exclude within local dir - Dockerfile is in here to be excluded
+
 .venv*
-.secrets_env.toml
+.env_dockerfile.toml
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

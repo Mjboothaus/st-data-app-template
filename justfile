@@ -84,12 +84,13 @@ gcr-setup:
     gcloud components update --quiet
     gcloud projects create --quiet {{project_name}}
     gcloud beta billing projects link {{project_name}} --billing-account $BILLING_ACCOUNT_GCP --quiet
-    gcloud services enable cloudbuild.googleapis.com --quiet
     gcloud services enable run.googleapis.com --quiet
+    gcloud services enable cloudbuild.googleapis.com --quiet
     gcloud services enable compute.googleapis.com --quiet
     gcloud services enable artifactregistry.googleapis.com --quiet
     gcloud config set project {{project_name}} --quiet
     gcloud config set region {{gcp_region}} --quiet
+    gcloud config set compute/zone {{gcp_region}}
 
 
 # Deploy container to Google Cloud (Cloud Run) and helper commands
@@ -107,6 +108,35 @@ gcr-app-disable:   # deleting project does not delete app
 
 
 # See: https://stackoverflow.com/questions/59423245/how-to-get-or-generate-deploy-url-for-google-cloud-run-services
-    
-  
 
+# Additional commands
+
+# gcloud config list project
+
+# gcloud auth list
+
+# gcloud config get-value project
+
+# gcloud container images list
+
+# gcloud auth configure-docker
+
+#gcloud run deploy helloworld \
+#  --image gcr.io/$GOOGLE_CLOUD_PROJECT/helloworld \
+#  --platform managed \
+#  --region us-central1 \
+#  --allow-unauthenticated
+
+# gcloud container images delete gcr.io/$GOOGLE_CLOUD_PROJECT/helloworld
+
+# gcloud run services delete helloworld \
+#  --platform managed \
+#  --region us-central1
+
+
+
+# To set the active account, run:
+#    $ gcloud config set account `ACCOUNT`
+
+# Finally, set the default zone and project configuration.
+# gcloud config set compute/zone us-central1-f
