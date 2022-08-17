@@ -1,5 +1,6 @@
 # Main.py -- for creating multipage app
 
+import os
 from pathlib import Path
 
 import streamlit as st
@@ -25,5 +26,9 @@ def create_app_header(app_title, subtitle=None):
     return None
 
 create_app_header(APP_TITLE, SUB_TITLE)
+
+
+st.write(os.environment["TEST_ENV_VAR"]
+         
 
 # read_render_markdown_file("docs/Main.md", output="streamlit")
