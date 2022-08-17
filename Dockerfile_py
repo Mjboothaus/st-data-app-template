@@ -1,0 +1,7 @@
+# TODO: Create a venv & don't be root to improve security
+
+# Python requirements install
+
+RUN pip install -U pip
+COPY requirements-deploy.txt requirements.txt
+RUN pip install -r requirements.txt
