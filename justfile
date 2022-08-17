@@ -2,7 +2,7 @@
 
 # Local just variables
 
-project_name := "st-data-app-template"
+project_name := "st-data-app-template-test"
 app_py := "app/Main.py"
 server_port := "8080"
 gcp_region := "australia-southeast1"
@@ -71,30 +71,31 @@ dockerfile:
 
 # Build and run app in a (local) Docker container
 
-docker: 
-    docker build . -t {{project_name}}
-    docker run -p {{server_port}}:{{server_port}} {{project_name}}
+docker: dockerfile
+  pip-compile requirements-deploy.in
+  docker build . -t {{project_name}} --platform linux/amd64
+  docker run -p {{server_port}}:{{server_port}} {{project_name}}
 
 
 # Google Cloud Run setup: work in progress (still not "STP" without user input)
 
 gcr-setup:
     #!/usr/bin/env bash
-    gcloud components update
-    gcloud projects create {{project_name}}
-    gcloud beta billing projects link {{project_name}} --billing-account $BILLING_ACCOUNT_GCP
-    gcloud services enable cloudbuild.googleapis.com
-    gcloud services enable run.googleapis.com
-    gcloud services enable compute.googleapis.com
-    gcloud services enable artifactregistry.googleapis.com
-    gcloud config set region {{gcp_region}}
-    gcloud config set project {{project_name}}
+    gcloud components update --quiet
+    gcloud projects create --quiet {{project_name}}
+    gcloud beta billing projects link {{project_name}} --billing-account $BILLING_ACCOUNT_GCP --quiet
+    gcloud services enable cloudbuild.googleapis.com --quiet
+    gcloud services enable run.googleapis.com --quiet
+    gcloud services enable compute.googleapis.com --quiet
+    gcloud services enable artifactregistry.googleapis.com --quiet
+    gcloud config set project {{project_name}} --quiet
+    gcloud config set region {{gcp_region}} --quiet
 
 
 # Deploy container to Google Cloud (Cloud Run) and helper commands
 
 gcr-deploy: 
-    gcloud run deploy --source . {{project_name}} --region {{gcp_region}}
+    gcloud run deploy --source . {{project_name}} --region {{gcp_region}} --allow-unauthenticated
 
 
 gcr-list-deployed-url:

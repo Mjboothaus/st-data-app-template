@@ -20,7 +20,7 @@ def create_dockerfile_with_env_vars(env_file=".secrets_env.toml", dockerfile="Do
     for section in sections:
         if section != "env":
             try:
-                with open(Path(f"Dockerfile_{section}"), "r") as f:
+                with open(Path(f"Dockerfile_{section}.txt"), "r") as f:
                     text = f.readlines()
                     with open(Path(dockerfile), "a") as fout:
                         fout.writelines(text)
