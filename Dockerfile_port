@@ -1,0 +1,3 @@
+# Expose the port the web app is exposed on
+
+EXPOSE 8080
