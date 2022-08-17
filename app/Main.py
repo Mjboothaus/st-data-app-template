@@ -30,7 +30,7 @@ def create_app_header(app_title, subtitle=None):
 create_app_header(APP_TITLE, SUB_TITLE)
 
 try:
-    st.write(os.environment["TEST_ENV_VAR"])
+    st.write(os.environ["TEST_ENV_VAR"])
 except Exception as e:
     st.write(e)
 
