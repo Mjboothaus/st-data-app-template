@@ -2,6 +2,7 @@
 
 import os
 from pathlib import Path
+from config import settings
 
 import streamlit as st
 
@@ -25,10 +26,12 @@ def create_app_header(app_title, subtitle=None):
         st.subheader(subtitle)
     return None
 
+
 create_app_header(APP_TITLE, SUB_TITLE)
 
-
-st.write(os.environment["TEST_ENV_VAR"]
-         
+try:
+    st.write(os.environment["TEST_ENV_VAR"])
+except Exception as e:
+    st.write(e)
 
 # read_render_markdown_file("docs/Main.md", output="streamlit")

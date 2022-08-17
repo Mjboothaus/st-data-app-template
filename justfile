@@ -50,12 +50,14 @@ update-reqs dev_deploy:
 
 rm-venv dev_deploy:
   #!/usr/bin/env bash
-	rm -rf .venv_{{dev_deploy}}_{{project_name}}
+  rm -rf .venv_{{dev_deploy}}_{{project_name}}
 
 
 test:
   pytest
 
+stv:
+  streamlit --version
 
 # Run app
 
@@ -85,7 +87,7 @@ gcr-setup:
     gcloud services enable run.googleapis.com
     gcloud services enable compute.googleapis.com
     gcloud services enable artifactregistry.googleapis.com
-    gcloud config set region {{gcp_region}
+    gcloud config set region {{gcp_region}}
     gcloud config set project {{project_name}}
 
 
