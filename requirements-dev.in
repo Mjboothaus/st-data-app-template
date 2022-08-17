@@ -1,0 +1,6 @@
+autopep8
+streamlit
+watchdog
+notebook
+pandas
+pytest
