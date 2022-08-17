@@ -61,7 +61,12 @@ test:
 
 app:
   streamlit run {{app_py}} --server.port={{server_port}} --server.address=localhost
- 
+
+dockerfile:
+  #!/usr/bin/env bash
+  python -m create_dockerfile.py
+  
+
 # Build and run app in a (local) Docker container
 
 docker: 
