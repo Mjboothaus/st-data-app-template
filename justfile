@@ -96,7 +96,20 @@ gcr-setup:
 # Deploy container to Google Cloud (Cloud Run) and helper commands
 
 gcr-deploy: dockerfile
-    gcloud run deploy --source . $PROJECT_NAME --region $GCP_REGION --allow-unauthenticated --quiet
+	#!/usr/bin/env bash
+	start=`date +%s`
+
+	gcloud run deploy \
+	--source . $PROJECT_NAME \
+	--region $GCP_REGION \
+	--allow-unauthenticated \
+	--quiet
+	
+	end=`date +%s`
+	runtime=$((end-start))
+	echo ""
+	echo $runtime seconds to run job
+	echo ""
 
 
 gcr-list-deployed-url:
