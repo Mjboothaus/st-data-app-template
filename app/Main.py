@@ -32,7 +32,7 @@ create_app_header(APP_TITLE, SUB_TITLE)
 
 
 try:
-    st.write(os.environ["TEST_ENV_VAR"])
+    st.write(os.environ["API_KEY"])
 except Exception as e:
     st.write(e)
 

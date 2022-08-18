@@ -1,13 +1,5 @@
 # See https://just.systems/
 
-# Local just variables
-
-project_name := "st-data-app-template-test"
-app_py := "app/Main.py"
-server_port := "8080"
-gcp_region := "australia-southeast1"
-docs_url := "https://TO_BE_DEFINED"
-
 # Load variables from .env file
 
 set dotenv-load
@@ -18,29 +10,29 @@ help:
   @just -l
   
 docs:
-	open {{docs_url}}
+	open $DOCS_URL
 
 port-process port:
-	sudo lsof -i :{{port}}
+	sudo lsof -i :$SERVER_PORT
 
 
-# Create the local Python venv (.venv_{{project_name}}) and install requirements(.txt)
+# Create the local Python venv (.venv_$PROJECT_NAME) and install requirements(.txt)
 
 venv dev_deploy:
 	#!/usr/bin/env bash
 	pip-compile requirements-{{dev_deploy}}.in
-	python3 -m venv .venv_{{dev_deploy}}_{{project_name}}
-	. .venv_{{dev_deploy}}_{{project_name}}/bin/activate
+	python3 -m venv .venv_{{dev_deploy}}_$PROJECT_NAME
+	. .venv_{{dev_deploy}}_$PROJECT_NAME/bin/activate
 	python3 -m pip install --upgrade pip
 	pip install -r requirements-{{dev_deploy}}.txt
-	python -m ipykernel install --user --name .venv_{{dev_deploy}}_{{project_name}}
+	python -m ipykernel install --user --name .venv_{{dev_deploy}}_$PROJECT_NAME
 	pip install -U prefect
-	echo -e '\n' source .venv_{{dev_deploy}}_{{project_name}}/bin/activate '\n'
+	echo -e '\n' source .venv_{{dev_deploy}}_$PROJECT_NAME/bin/activate '\n'
 
 
 activate dev_deploy:
 	#!/usr/bin/env zsh
-	echo -e '\n' source .venv_{{dev_deploy}}_{{project_name}}/bin/activate '\n'
+	echo -e '\n' source .venv_{{dev_deploy}}_$PROJECT_NAME/bin/activate '\n'
 
 
 update-reqs dev_deploy:
@@ -50,7 +42,7 @@ update-reqs dev_deploy:
 
 rm-venv dev_deploy:
   #!/usr/bin/env bash
-  rm -rf .venv_{{dev_deploy}}_{{project_name}}
+  rm -rf .venv_{{dev_deploy}}_$PROJECT_NAME
 
 
 test:
@@ -62,7 +54,7 @@ stv:
 # Run app
 
 app:
-  streamlit run {{app_py}} --server.port {{server_port}} --server.address localhost
+  streamlit run $STREAMLIT_RUN_PY --server.port $SERVER_PORT --server.address localhost
 
 dockerfile:
   #!/usr/bin/env bash
@@ -73,8 +65,8 @@ dockerfile:
 
 docker: dockerfile
   pip-compile requirements-deploy.in
-  docker build . -t {{project_name}} --platform linux/amd64
-  docker run -p {{server_port}}:{{server_port}} {{project_name}}
+  docker build . -t $PROJECT_NAME --platform linux/amd64
+  docker run -p $SERVER_PORT$:$SERVER_PORT $PROJECT_NAME
 
 
 # Google Cloud Run setup: work in progress (still not "STP" without user input)
@@ -82,21 +74,21 @@ docker: dockerfile
 gcr-setup:
     #!/usr/bin/env bash
     gcloud components update --quiet
-    gcloud projects create --quiet {{project_name}}
-    gcloud beta billing projects link {{project_name}} --billing-account $BILLING_ACCOUNT_GCP --quiet
+    gcloud projects create --quiet $PROJECT_NAME
+    gcloud beta billing projects link $PROJECT_NAME --billing-account $BILLING_ACCOUNT_GCP --quiet
     gcloud services enable run.googleapis.com --quiet
     gcloud services enable cloudbuild.googleapis.com --quiet
     gcloud services enable compute.googleapis.com --quiet
     gcloud services enable artifactregistry.googleapis.com --quiet
-    gcloud config set project {{project_name}} --quiet
-    gcloud config set region {{gcp_region}} --quiet
-    gcloud config set compute/zone {{gcp_region}}
+    gcloud config set project $PROJECT_NAME --quiet
+    gcloud config set region $GCP_REGION --quiet
+    gcloud config set compute/zone $GCP_REGION
 
 
 # Deploy container to Google Cloud (Cloud Run) and helper commands
 
 gcr-deploy: 
-    gcloud run deploy --source . {{project_name}} --region {{gcp_region}} --allow-unauthenticated
+    gcloud run deploy --source . $PROJECT_NAME --region $GCP_REGION --allow-unauthenticated
 
 
 gcr-list-deployed-url:
@@ -124,14 +116,14 @@ gcr-app-disable:   # deleting project does not delete app
 #gcloud run deploy helloworld \
 #  --image gcr.io/$GOOGLE_CLOUD_PROJECT/helloworld \
 #  --platform managed \
-#  --region us-central1 \
+#  --region {{GCP_REGION}} \
 #  --allow-unauthenticated
 
 # gcloud container images delete gcr.io/$GOOGLE_CLOUD_PROJECT/helloworld
 
 # gcloud run services delete helloworld \
 #  --platform managed \
-#  --region us-central1
+#  --region {{GCP_REGION}}
 
 
 
@@ -139,4 +131,4 @@ gcr-app-disable:   # deleting project does not delete app
 #    $ gcloud config set account `ACCOUNT`
 
 # Finally, set the default zone and project configuration.
-# gcloud config set compute/zone us-central1-f
+# gcloud config set compute/zone {{GCP_REGION}}

@@ -44,6 +44,7 @@ def create_dockerfile_with_env_vars(python_version="3.10", env_file=".env_docker
             with open(Path(dockerfile), "a") as fout:
                 for k, v in env_dict.items():
                     if k[:n_secret] == "SECRET_":
+                        k = k.replace("SECRET_", "")
                         fout.writelines(f"ENV {k}={v}\n")
                 fout.write("\n")
 
