@@ -21,3 +21,9 @@ Can be swapped out for another such library.
 
 Create a file `.secrets_env.toml` in the root (top) directory which contains any environment variables that you want to create in the Dockerfile
 
+
+## TODO
+
+- Set up debug
+- Report deploy time in justfile
+- 

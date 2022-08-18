@@ -11,6 +11,6 @@ WORKDIR /{{APP_DIR}}
 
 # Run {{APP_DIR}}
 
-ENTRYPOINT ["streamlit", "run", "{{STREAMLIT_RUN_PY}}", "--server.port={{PORT}}", "--server.address=0.0.0.0"]
+ENTRYPOINT ["streamlit", "run", "{{STREAMLIT_RUN_PY}}", "--server.port={{SERVER_PORT}}", "--server.address=0.0.0.0"]
 
 # See https://discuss.streamlit.io/t/deploying-streamlit-on-gcp-cloud-run-problem-when-using-new-multipage-{{APP_DIR}}-feature/26316/3
