@@ -33,10 +33,12 @@ create_app_header(APP_TITLE, SUB_TITLE)
 
 ENV_VAR = "API_KEY"
 
+test_env_var = "UNDEFINED"
+
 try:
     test_env_var = os.environ[ENV_VAR]
 except Exception:
-    test_env_var = settings.ENV_VAR
+    # test_env_var = settings[ENV_VAR]
     st.info("Running locally the environment variable is not available using value from `.env_dockerfile.toml,`")
 
 

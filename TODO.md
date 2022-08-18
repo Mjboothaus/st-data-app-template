@@ -30,3 +30,4 @@ Debug icon (run &  debug) - debug as normal - put in links
 - Set up Streamlit debug - Done
 - Report deploy time in justfile - DONE - to test
 - Exclude dirs from tree listing (do only dir & not subdirs)
+- Set up pytest-ing and write some (generic tests - of setup?)

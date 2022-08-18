@@ -14,7 +14,8 @@ with tab0:
   st.write(f"{APP_TITLE}: {TAB_NAMES[0]}")
   
   with st.spinner("Creating directory tree"):
-    tree = show_dir_tree(Path.cwd(), not_hidden=False)
+    tree = show_dir_tree(Path.cwd())
+    st.code(tree)
 
   
 with tab1:
