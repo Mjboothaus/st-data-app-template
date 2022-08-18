@@ -1,4 +1,5 @@
+dynaconf
+pandas
+seedir
 streamlit
 watchdog
-pandas
-dynaconf

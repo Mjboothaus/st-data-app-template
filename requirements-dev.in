@@ -1,7 +1,8 @@
 autopep8
-streamlit
-watchdog
+dynaconf
 notebook
 pandas
 pytest
-dynaconf
+seedir
+streamlit
+watchdog
