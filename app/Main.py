@@ -1,5 +1,6 @@
 # Main.py -- for creating a basic multi-page Streamlit app
 
+from cgi import test
 import os
 from pathlib import Path
 
@@ -38,8 +39,9 @@ test_env_var = "UNDEFINED"
 try:
     test_env_var = os.environ[ENV_VAR]
 except Exception:
-    # test_env_var = settings[ENV_VAR]
-    st.info("Running locally the environment variable is not available using value from `.env_dockerfile.toml,`")
+    # TODO: This is not a great solution (see config.py for files that are loaded). Have to hard code the env variable name
+    st.info("Running locally the environment variable is not available using value from `.env_dockerfile.toml`")
+    test_env_var = settings.SECRET_API_KEY
 
 
 st.write(f"Test environment variable: {ENV_VAR} = {test_env_var}")
