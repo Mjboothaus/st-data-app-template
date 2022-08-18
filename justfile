@@ -74,21 +74,29 @@ docker: dockerfile
 gcr-setup:
     #!/usr/bin/env bash
     gcloud components update --quiet
-    gcloud projects create --quiet $PROJECT_NAME
+    # TODO: Check if project already exists
+    gcloud projects create $PROJECT_NAME --quiet
     gcloud beta billing projects link $PROJECT_NAME --billing-account $BILLING_ACCOUNT_GCP --quiet
     gcloud services enable run.googleapis.com --quiet
-    gcloud services enable cloudbuild.googleapis.com --quiet
     gcloud services enable compute.googleapis.com --quiet
+    gcloud services enable cloudbuild.googleapis.com --quiet
     gcloud services enable artifactregistry.googleapis.com --quiet
     gcloud config set project $PROJECT_NAME --quiet
-    gcloud config set region $GCP_REGION --quiet
-    gcloud config set compute/zone $GCP_REGION
+    # gcloud config set region $GCP_REGION --quiet
+    gcloud config set compute/zone $GCP_REGION --quiet
+
+# check_project_exists := `gcloud projects describe $PROJECT_NAME | grep name | awk {'print $2'}`
+# check_eq := `{{check_project_exists}} == $PROJECT_NAME`
+
+#gcr-check-project-exists: IN_PROGRESS
+#    #!/usr/bin/env bash
+#    if {{check_eq}} { "Good!" } else { "1984" }
 
 
 # Deploy container to Google Cloud (Cloud Run) and helper commands
 
-gcr-deploy: 
-    gcloud run deploy --source . $PROJECT_NAME --region $GCP_REGION --allow-unauthenticated
+gcr-deploy: dockerfile
+    gcloud run deploy --source . $PROJECT_NAME --region $GCP_REGION --allow-unauthenticated --quiet
 
 
 gcr-list-deployed-url:
