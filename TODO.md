@@ -15,15 +15,18 @@ Check the version of Streamlit you're using:
 
 Create a `.env` to store any secrets used in the `justfile` (not to be committed to GitHub)
 
-Use of DynaConf
+### Use of DynaConf
 
 Can be swapped out for another such library.
 
-Create a file `.secrets_env.toml` in the root (top) directory which contains any environment variables that you want to create in the Dockerfile
+Create a file `.env_dockerfile.toml` in the root (top) directory which contains any environment variables that you want to create in the Dockerfile
 
+### Debugging is Visual Studio Code (VS Code)\
+
+Debug icon (run &  debug) - debug as normal - put in links
 
 ## TODO
 
-- Set up debug
-- Report deploy time in justfile
-- 
+- Set up Streamlit debug - Done
+- Report deploy time in justfile - DONE - to test
+- Exclude dirs from tree listing (do only dir & not subdirs)

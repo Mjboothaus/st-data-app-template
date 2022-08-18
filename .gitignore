@@ -2,6 +2,9 @@
 
 .venv*
 .env_dockerfile.toml
+.vscode
+!.vscode/launch.json
+
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

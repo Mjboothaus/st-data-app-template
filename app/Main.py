@@ -2,10 +2,11 @@
 
 import os
 from pathlib import Path
-from config import settings
-from src.helper import render_markdown_file, show_dir_tree
 
 import streamlit as st
+
+from config import settings
+from src.helper import render_markdown_file
 
 # from helper_functions import read_render_markdown_file
 
@@ -33,13 +34,13 @@ create_app_header(APP_TITLE, SUB_TITLE)
 ENV_VAR = "API_KEY"
 
 try:
-    st.write(f"Test container environment variable: {ENV_VAR} = {os.environ[ENV_VAR]}")
-except Exception as e:
-    st.info("If running locally the environment variable is not available - see package which caters for this.")
-    #
-    # st.write(e)
+    test_env_var = os.environ[ENV_VAR]
+except Exception:
+    test_env_var = settings.ENV_VAR
+    st.info("Running locally the environment variable is not available using value from `.env_dockerfile.toml,`")
+
+
+st.write(f"Test environment variable: {ENV_VAR} = {test_env_var}")
 
 
 render_markdown_file(Path.cwd()/"docs/Main.md")
-
-tree = show_dir_tree(Path.cwd(), not_hidden=False)
