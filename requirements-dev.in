@@ -6,3 +6,6 @@ pytest
 seedir
 streamlit
 watchdog
+streamlit-pandas-profiling
+pandas-profiling
+httpx
