@@ -15,12 +15,9 @@ tab0, tab1 = st.tabs(TAB_NAMES)
 with tab0:
     st.write(f"{APP_TITLE}: {TAB_NAMES[0]}")
 
-    with st.spinner("Creating directory tree"):
-        #tree = show_dir_tree(Path.cwd())
-        # st.code(tree)
-        dir_str = seedir(path=Path.cwd().as_posix(), style='emoji',
-                         printout=False, itemlimit=10, depthlimit=2, exclude_folders='.git')
-        st.code(dir_str)
+    dir_str = seedir(path=Path.cwd().as_posix(), style='emoji',
+                     printout=False, itemlimit=10, depthlimit=2, exclude_folders='.git')
+    st.code(dir_str)
 
 
 with tab1:
