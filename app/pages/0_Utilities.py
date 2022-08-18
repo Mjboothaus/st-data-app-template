@@ -11,7 +11,7 @@ TAB_NAMES = ["Directory structure", "Tab 2"]
 tab0, tab1 = st.tabs(TAB_NAMES)
 
 with tab0:
-  st.write(f"{APP_TITLE}: f"{TAB_NAMES[0]}")
+  st.write(f"{APP_TITLE}: {TAB_NAMES[0]}")
   
   with st.spinner("Creating directory tree"):
     tree = show_dir_tree(Path.cwd(), not_hidden=False)
