@@ -97,6 +97,7 @@ gcr-setup:
 
 gcr-deploy: dockerfile
 	#!/usr/bin/env bash
+	pip-compile requirements-deploy.in
 	start=`date +%s`
 
 	gcloud run deploy \
