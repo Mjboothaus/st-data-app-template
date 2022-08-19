@@ -8,8 +8,12 @@ from seedir import seedir
 
 ITEM_LIMIT = 50
 
-
 def create_page_0_tab_1():
+    for item in get_system_info():
+        st.code(item)
+
+
+def create_page_0_tab_2():
   depth = st.selectbox(label="Directory tree: Level depth", options=range(1, 6))
 
   my_path = Path.cwd().as_posix()
@@ -25,14 +29,12 @@ def create_page_0_tab_1():
   create_sidebar_utilities()
 
 
-
 TAB_NAMES = ["System Info", "Directory structure"]
-tab0, tab1 = st.tabs(TAB_NAMES)
 
-
-with tab0:
-    for item in get_system_info():
-        st.code(item)
+tab1, tab2 = st.tabs(TAB_NAMES)
 
 with tab1:
-    create_page_0_tab_1()
+  create_page_0_tab_1()
+
+with tab2:
+  create_page_0_tab_2()

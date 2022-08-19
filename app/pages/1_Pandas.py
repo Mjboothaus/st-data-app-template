@@ -3,6 +3,7 @@ from pathlib import Path
 
 import streamlit as st
 from Main import APP_TITLE
+from src.datasource import create_data_profile
 from src.datasource import get_data_pandas_example
 from src.helper import get_file_header, render_markdown_file
 from streamlit_pandas_profiling import st_profile_report
@@ -27,9 +28,9 @@ datasource.header = 0
 
 # TODO: Create sidebar
 
-tab1, tab2, tab3 = st.tabs(["Dataset", "Profile", "Metadata"])
+df = get_data_pandas_example(datasource.url, datasource.sep, datasource.header)
 
-df, profile_report = get_data_pandas_example(datasource.url, datasource.sep, datasource.header)
+tab1, tab2, tab3, tab4 = st.tabs(["Dataset", "Profile", "Metadata", "Expectations"])
 
 with tab1:
   st.write(f"Data source: {datasource.name} - file header:")
@@ -39,7 +40,11 @@ with tab1:
  
   
 with tab2:
-  st_profile_report(profile_report)
+  st_profile_report(create_data_profile(df))
+
 
 with tab3:
   render_markdown_file(Path.cwd()/"docs/pandas_example_white_wine.md")
+
+with tab4:
+  st.info("Link in Great Expectations for pandas dataframe")
