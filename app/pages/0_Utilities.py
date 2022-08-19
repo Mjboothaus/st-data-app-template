@@ -6,28 +6,33 @@ from src.helper import get_system_info
 from src.sidebar import create_sidebar_utilities
 from seedir import seedir
 
-ITEM_LIMIT=50
+ITEM_LIMIT = 50
 
-def create_page_0_tab_0():
-    my_path = Path.cwd().as_posix()
-    exclude_folders = [folder.parts[-1] for folder in Path(my_path).iterdir() if folder.is_dir() and "venv" in folder.as_posix()]
-    exclude_folders.append(".git")
-    dir_str = seedir(path=my_path, style='emoji', sort=True,
-                     printout=False, itemlimit=ITEM_LIMIT, depthlimit=depth, 
+
+def create_page_0_tab_1():
+  depth = st.selectbox(label="Directory tree: Level depth", options=range(1, 6))
+
+  my_path = Path.cwd().as_posix()
+  exclude_folders = [folder.parts[-1] for folder in Path(my_path).iterdir()
+                      if folder.is_dir() and "venv" in folder.as_posix()]
+  exclude_folders.append(".git")
+  dir_str = seedir(path=my_path, style='emoji', sort=True,
+                     printout=False, itemlimit=ITEM_LIMIT, depthlimit=depth,
                      exclude_folders=exclude_folders)
-    st.code(f"Excluding: {', '.join(exclude_folders)}")
-    st.code(dir_str)
+  st.code(f"Exclude directory(s): {', '.join(exclude_folders)}")
+  st.code(dir_str)
+
+  create_sidebar_utilities()
 
 
-depth = create_sidebar_utilities()
 
-TAB_NAMES = ["Directory structure", "System Info"]
+TAB_NAMES = ["System Info", "Directory structure"]
 tab0, tab1 = st.tabs(TAB_NAMES)
 
-with tab0:
-    create_page_0_tab_0()
 
+with tab0:
+    for item in get_system_info():
+        st.code(item)
 
 with tab1:
-  for item in get_system_info():
-    st.code(item)
+    create_page_0_tab_1()

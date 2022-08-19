@@ -5,4 +5,4 @@ def create_sidebar_main():
 
 
 def create_sidebar_utilities():
-    return st.sidebar.slider("Directory tree: Level depth", min_value=1, max_value=5, value=3, step=1)
+    st.sidebar.subheader("Utilities")

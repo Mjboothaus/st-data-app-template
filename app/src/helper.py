@@ -1,4 +1,4 @@
-import platform
+import platform as plf
 from pathlib import Path
 
 import httpx
@@ -31,7 +31,6 @@ def render_markdown_file(markdown_file, output="streamlit"):
 
 def get_file_header(file_name, n_char=100, n_row=1):
     if file_name[:len("http")] == "http":
-        sys_list.append(file_name)
         with httpx.Client() as client:
             r = client.get(file_name)
         return r.text[:min(n_char, len(r.text))]
@@ -41,15 +40,8 @@ def get_file_header(file_name, n_char=100, n_row=1):
 
 
 def get_system_info():
-    my_sys = platform.uname()
- 
-    sys_list = [f"System: {my_sys.system}"]
-    sys_list.append(f"Node Name: {my_sys.node}")
-    sys_list.append(f"Release: {my_sys.release}")
-    sys_list.append(f"Version: {my_sys.version}")
-    sys_list.append(f"Machine: {my_sys.machine}")
-    sys_list.append(f"Processor: {my_sys.processor}")
-    sys_list.append(f"Architecture: {platform.architecture()}")
-    sys_list.append(f"Python version: {platform.python_version()}")
-
-    return sys_list
+    plat = plf.uname()
+    return [f"System: {plat.system}", f"Node Name: {plat.node}", 
+            f"Release: {plat.release}", f"Version: {plat.version}", 
+            f"Machine: {plat.machine}", f"Processor: {plat.processor}", 
+            f"Architecture: {plf.architecture()}", f"Python version: {plf.python_version()}"]
