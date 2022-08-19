@@ -48,6 +48,18 @@ rm-venv dev_deploy:
 test:
   pytest
 
+
+pyenv-list:
+	pyenv install -l
+
+
+pyenv:
+	brew update && brew upgrade pyenv
+	pyenv install $PYTHON_VERSION
+	pyenv local $PYTHON_VERSION
+	pipx reinstall-all
+
+
 stv:
   streamlit --version
 
@@ -63,9 +75,13 @@ dockerfile:
 
 # Build and run app in a (local) Docker container
 
+open-docker:
+	open /Applications/Docker.app
+	
+
 docker: dockerfile
   pip-compile requirements-deploy.in
-  docker build . -t $PROJECT_NAME --platform linux/amd64
+  docker build . -t $PROJECT_NAME
   docker run -p $SERVER_PORT$:$SERVER_PORT $PROJECT_NAME
 
 
@@ -154,3 +170,8 @@ gcr-app-disable:   # deleting project does not delete app
 
 # Finally, set the default zone and project configuration.
 # gcloud config set compute/zone {{GCP_REGION}}
+
+# Utilities
+
+pipx:
+	pipx reinstall-all
