@@ -2,6 +2,7 @@ from pathlib import Path
 
 import streamlit as st
 from Main import APP_TITLE
+from src.helper import get_system_info
 from src.sidebar import create_sidebar_utilities
 from seedir import seedir
 
@@ -20,7 +21,7 @@ def create_page_0_tab_0():
 
 depth = create_sidebar_utilities()
 
-TAB_NAMES = ["Directory structure", "Tab 2"]
+TAB_NAMES = ["Directory structure", "System Info"]
 tab0, tab1 = st.tabs(TAB_NAMES)
 
 with tab0:
@@ -28,4 +29,5 @@ with tab0:
 
 
 with tab1:
-    st.write(f"{APP_TITLE}: {TAB_NAMES[1]}")
+  for item in get_system_info():
+    st.code(item)
