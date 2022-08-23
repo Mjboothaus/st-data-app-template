@@ -19,18 +19,11 @@ SERVER_PORT = "8080"
 GCP_REGION = "your-gcp-deployment-region"
 DOCS_URL = "https://TO_BE_DEFINED"
 PYTHON_VERSION = "3.9.13"
+```
 
 Both `.env` and `.env_dockerfile.toml` should NOT be committed to your repo. TODO: Say more on this.
 
-### Initial steps
-
-After creating a new repo from the template - git clone the repo
-
-1. Customise `README.md`
-2. Edit `settings.toml` for the name of your app and subtitle if relevant
-3. 
-
-Create python development (`dev`) virtual environment
+### Create the Python development (`dev`) virtual environment
 
 `just venv dev`
 
@@ -45,7 +38,21 @@ Check the version of Streamlit you're using:
 `just stv`
 
 
+### Initial steps
+
+After creating a new repo from the template - git clone the repo
+
+1. Customise `README.md`
+2. Edit `settings.toml` for the name of your app and subtitle if relevant
+3. 
+
+
+
 Create a `.env` to store any secrets used in the `justfile` (not to be committed to GitHub)
+
+### Check that you can run the skeleton app
+
+`just app`
 
 ### Use of DynaConf
 
