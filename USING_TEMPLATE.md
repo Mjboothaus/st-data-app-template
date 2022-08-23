@@ -72,3 +72,7 @@ Create a file `.env_dockerfile.toml` in the root (top) directory which contains 
 ### Debugging is Visual Studio Code (VS Code)\
 
 Debug icon (run &  debug) - debug as normal - put in links
+
+## Deployment - Google Cloud Run on GCP
+
+Make sure project name is sufficiently long in `.env` file or it gets upset.
