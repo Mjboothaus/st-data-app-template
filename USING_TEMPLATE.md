@@ -2,8 +2,11 @@
 
 This contains the first things that need to be done to use this template.
 
-Customise `README.md`
+After creating a new repo from the template - git clone the repo
 
+1. Customise `README.md`
+2. Edit `settings.toml` for the name of your app and subtitle if relevant
+3. 
 
 Create python development (dev) virtual environment
 
