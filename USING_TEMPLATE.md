@@ -23,6 +23,15 @@ PYTHON_VERSION = "3.9.13"
 
 Both `.env` and `.env_dockerfile.toml` should NOT be committed to your repo. TODO: Say more on this.
 
+##### Do not commit repo
+
+`.env <--> justfile`
+`.env_dockerfile.toml <--> Dockerfile` (created via `utils/create_dockerfile.py`)
+`.secrets <--> Main.py` (via from config import settings)
+
+#### Commit to repo
+`settings.toml <--> Main.py` (via `from config import settings`). Don't put secrets in here!
+
 ### Create the Python development (`dev`) virtual environment
 
 `just venv dev`
