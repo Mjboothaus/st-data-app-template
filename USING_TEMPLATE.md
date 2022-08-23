@@ -2,6 +2,8 @@
 
 This contains the first things that need to be done to use this template.
 
+This is tailored to a VS Code setup, although in most cases should translate to other IDEs.
+
 After creating a new repo from the template - git clone the repo
 
 1. Customise `README.md`
