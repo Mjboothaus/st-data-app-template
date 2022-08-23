@@ -4,6 +4,14 @@ This contains the first things that need to be done to use this template.
 
 This is tailored to a VS Code setup, although in most cases should translate to other IDEs.
 
+### `justfile` and `just`
+
+See manual at [https://just.systems](https://just.systems). This template requires the installation of the `just` tool. Instead of using a `Makefile`
+`just` provides a more contempary and powerful approach for creating recipes for assisting in development. To install on e.g. macOS use:
+`brew install just`. See the manual for many other platform install instructions.
+
+### Initial steps
+
 After creating a new repo from the template - git clone the repo
 
 1. Customise `README.md`
