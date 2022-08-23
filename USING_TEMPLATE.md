@@ -76,3 +76,5 @@ Debug icon (run &  debug) - debug as normal - put in links
 ## Deployment - Google Cloud Run on GCP
 
 Make sure project name is sufficiently long in `.env` file or it gets upset.
+
+Typically you have to choose Y for enanbling various GCR APIs.
