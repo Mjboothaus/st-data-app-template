@@ -78,3 +78,8 @@ Debug icon (run &  debug) - debug as normal - put in links
 Make sure project name is sufficiently long in `.env` file or it gets upset.
 
 Typically you have to choose Y for enanbling various GCR APIs.
+
+Check that you can successfully deploy the template app before making changes :)
+
+`gcr-setup` then
+`gcr-deploy`
