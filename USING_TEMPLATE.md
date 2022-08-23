@@ -1,5 +1,8 @@
 This contains the first things that need to be done to use this template.
 
+Customise `README.md`
+
+
 Create python development (dev) virtual environment
 
 `just venv dev`
