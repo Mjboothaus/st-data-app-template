@@ -1,3 +1,5 @@
+## Using the Template
+
 This contains the first things that need to be done to use this template.
 
 Customise `README.md`
