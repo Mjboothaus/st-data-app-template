@@ -10,9 +10,11 @@ After creating a new repo from the template - git clone the repo
 2. Edit `settings.toml` for the name of your app and subtitle if relevant
 3. 
 
-Create python development (dev) virtual environment
+Create python development (`dev`) virtual environment
 
 `just venv dev`
+
+this relies on requirements-dev.in (via `pip-compile` - ideally via `pipx install pip-tools`) which you can adjust for the packages you are using - similarly for the `deploy` environment (which typically has fewer packages required e.g. typically no need for `pytest` or `autopep8` in deployments.
 
 Activate the environment where here .venv is the name of the venv directory
 
